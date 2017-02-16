@@ -1,0 +1,50 @@
+server:
+  port: ${vcap.application.port:8761}
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: true
+  healthcheck:
+    enabled: true
+
+eureka:
+  registration:
+    enabled: true
+  numberRegistrySyncRetries: 1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enableSelfPreservation: false
+    eviction-interval-timer-in-ms: 1000
+  instance: 
+    preferIpAddress: true
+  dashboard:
+    enabled: false
+    
+ribbon:
+  eureka:
+    enabled: true
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 0
+    OkToRetryOnAllOperations: false
+    ServerListRefreshInterval: 2000
+    ConnectTimeout: 90000000
+    ReadTimeout: 90000000
+    
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+    
+spring:
+  main:
+    show_banner: false
+  application:
+    name: eurekaserver

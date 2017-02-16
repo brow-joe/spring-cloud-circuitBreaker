@@ -1,0 +1,47 @@
+server:
+  port: 0
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  metrics: 
+    enabled: true
+  health:
+    sensitive: false
+    
+multipart:
+  max-file-size: 999999999
+  max-request-size: 999999999
+  maxFileSize: 999999999
+  maxRequestSize: 999999999    
+
+eureka: 
+  instance:
+    instance-id: ${spring.application.name}:${random.string}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 1
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:8761}/eureka/
+      
+ribbon:
+  ConnectTimeout: 90000000
+  ReadTimeout: 90000000
+  OkToRetryOnAllOperation: false
+  eureka:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false    
+
+spring:
+  main:
+    show_banner: false
+  application:
+    name: service
